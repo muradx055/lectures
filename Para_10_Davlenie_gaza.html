@@ -169,28 +169,28 @@
   /* 2. жидкость: плотно, колеблются и иногда перескакивают на соседнее место */
   function Liquid(){
     var W = 160, H = 112, ms = [], nextHop = 0.6, hot = null, hotT = 0;
-    for (var r = 0; r < 7; r++) for (var c = 0; c < 14; c++){
-      var x = 14 + c * 10.5 + (r % 2 ? 5 : 0), y = 42 + r * 9.5; if (x > 150) continue;
+    for (var r = 0; r < 5; r++) for (var c = 0; c < 14; c++){
+      var x = 14 + c * 10.5 + (r % 2 ? 5 : 0), y = 64 + r * 9.5; if (x > 150) continue;
       ms.push({x:x, y:y, hx:x, hy:y, vx:0, vy:0});
     }
     return {W:W, H:H,
       step:function(dt){
-        ms.forEach(function(m){ springStep(m, dt, 90, 10, 1400); });
+        ms.forEach(function(m){ springStep(m, dt, 120, 12, 520); });
         nextHop -= dt; if (hotT > 0) hotT -= dt;
         if (nextHop <= 0){ nextHop = rnd(0.5, 1.1);
           var a = ms[Math.floor(Math.random() * ms.length)], best = null, bd = 1e9;
           ms.forEach(function(b){ if (b === a) return; var d = Math.hypot(a.hx - b.hx, a.hy - b.hy); if (d < 13 && d < bd && Math.random() < 0.6){ bd = d; best = b; } });
           if (best){ var tx = a.hx, ty = a.hy; a.hx = best.hx; a.hy = best.hy; best.hx = tx; best.hy = ty; hot = a; hotT = 0.9; } } },
-      draw:function(g){ frame(g, W, H, '#f4f8ff'); g.fillStyle = '#cfe3fb'; g.fillRect(5, 28, 150, 79);
+      draw:function(g){ frame(g, W, H, '#f4f8ff'); g.fillStyle = '#cfe3fb'; g.fillRect(5, 57, 150, 50);
         ms.forEach(function(m){ mol(g, m.x, m.y, 4.6, (m === hot && hotT > 0) ? '#f08c00' : null); }); }};
   }
 
   /* 3. твёрдое тело: решётка, молекулы только дрожат около своих мест */
   function Solid(){
     var W = 160, H = 112, ms = [];
-    for (var r = 0; r < 7; r++) for (var c = 0; c < 11; c++) ms.push({hx:18 + c * 12.6, hy:16 + r * 13.5, px:rnd(0, 6.28), py:rnd(0, 6.28), w:rnd(9, 15)});
+    for (var r = 0; r < 5; r++) for (var c = 0; c < 9; c++) ms.push({hx:34 + c * 11.5, hy:56 + r * 11.5, px:rnd(0, 6.28), py:rnd(0, 6.28), w:rnd(9, 15)});
     return {W:W, H:H, step:function(){}, 
-      draw:function(g){ frame(g, W, H); ms.forEach(function(m){ mol(g, m.hx + 1.7 * Math.sin(m.w * T + m.px), m.hy + 1.7 * Math.sin(m.w * T + m.py), 4.8); }); }};
+      draw:function(g){ frame(g, W, H); ms.forEach(function(m){ mol(g, m.hx + 1.0 * Math.sin(m.w * T + m.px), m.hy + 1.0 * Math.sin(m.w * T + m.py), 4.5); }); }};
   }
 
   /* 4. шприцы: воздух сжимается, вода почти нет. Можно нажать пальцем */
