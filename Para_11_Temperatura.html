@@ -35,6 +35,8 @@
   .lab .row.three figure:nth-child(3) canvas{max-width:250px}
   .lab .row.three figcaption{font-size:13px}
   @media(min-width:680px){.lab .row.three{grid-template-columns:repeat(3,1fr)}.lab .row.three figure:nth-child(3){grid-column:auto}.lab .row.three figure:nth-child(3) canvas{max-width:340px}}
+  .steps-fig{margin:6px 0 14px;text-align:center}
+  .steps-fig svg{display:block;width:100%;max-width:340px;height:auto;margin:0 auto;background:#fff;border-radius:8px}
   .sticky .ctl{margin:0}
   .sticky .out{font-size:16px;margin:0 0 2px;white-space:nowrap}
   .sticky input[type=range]{height:30px}
@@ -74,13 +76,13 @@
   <a class="pdf" href="Para_11_Temperatura.pdf">⬇ Скачать PDF для печати</a>
 
   <h2><span class="n">1</span>Тепловые явления</h2>
-  <p>Явления нагревания и охлаждения, таяния, плавления называются <b>тепловыми явлениями</b>.</p>
+  <p>Нагревание, охлаждение, таяние, плавление — это <b>тепловые явления</b>.</p>
 
   <h2><span class="n">2</span>Температура</h2>
-  <div class="def"><b>Температура</b> — величина, которая характеризует тепловое состояние тела (насколько оно нагрето) и показывает, как быстро в среднем движутся его молекулы. Чем выше температура, тем быстрее движутся молекулы.</div>
+  <div class="def"><b>Температура</b> — величина, которая показывает, насколько тело нагрето: чем теплее, тем быстрее движутся его молекулы.</div>
 
   <div class="lab">
-    <b>Попробуйте сами:</b> двигайте ползунок и смотрите на все три картинки.
+    <b>Двигайте ползунок</b>
     <div class="sticky">
     <div class="ctl"><label for="sl1">t, °C</label><input id="sl1" type="range" min="-150" max="350" step="5" value="20"></div>
     <div class="out" id="out1"></div>
@@ -92,30 +94,49 @@
     </div>
   </div>
 
-  <p>При нагревании молекулы движутся быстрее, чаще и сильнее отталкивают друг друга. Расстояния между ними растут, поэтому тело <b>расширяется</b> (объём растёт). При охлаждении тело сжимается.</p>
-  <p>Газ в закрытом сосуде расширяться не может: у него растёт <b>давление</b>. При охлаждении давление падает. Поэтому кислородный баллон нельзя ставить у батареи и на солнце.</p>
+  <p>При нагревании тело <b>расширяется</b>, при охлаждении сжимается.</p>
+  <p>Газ в закрытом баллоне расширяться не может — растёт <b>давление</b>. Поэтому баллон нельзя нагревать.</p>
 
-  <div class="def"><b>Тепловое равновесие</b> — состояние, при котором температуры тел одинаковы и не меняются: тепло от тела к телу больше не переходит.</div>
+  <div class="def"><b>Тепловое равновесие</b> — температуры тел одинаковы и не меняются: тепло больше не переходит.</div>
 
   <div class="lab">
-    <b>Градусник под мышкой.</b> Нажмите кнопку и смотрите, что будет с показанием.
+    <b>Градусник под мышкой</b>
     <div class="btns"><button id="go2">Положить под мышку</button><button id="rs2">Заново</button></div>
     <canvas id="cv2" style="max-width:340px"></canvas>
     <div class="out" id="out2"></div>
   </div>
-  <div class="key"><div>Термометр показывает температуру <b>самого себя</b>. Градусник держат под мышкой несколько минут, пока он не придёт в тепловое равновесие с телом.</div></div>
+  <div class="key"><div>Термометр показывает температуру <b>самого себя</b>. Ждём, пока он нагреется до температуры тела.</div></div>
 
   <h2><span class="n">3</span>Термометр. Шкала Цельсия</h2>
-  <p>В термометре жидкость при нагревании расширяется, и столбик поднимается. Значит, термометр измеряет не температуру, а объём (высоту столбика). Чтобы связать объём с температурой, нужна <b>температурная шкала</b>. Самые распространённые: Цельсия, Фаренгейта и Кельвина. Мы изучаем шкалы Цельсия и Кельвина.</p>
-  <div class="def"><b>Шкала Цельсия [°C], t:</b> 0 °C — таяние льда; 100 °C — кипение воды (при нормальном атмосферном давлении). Между ними 100 равных частей, одна часть — 1 °C.</div>
-  <p>Здоровый человек: 36,6 °C. Выше 42 °C — опасно для жизни, ниже 35 °C — переохлаждение.</p>
+  <p>В термометре жидкость расширяется, столбик растёт. Он измеряет <b>объём</b>, а температуру показывает <b>шкала</b>. Самые распространённые шкалы — три: Цельсия, Фаренгейта, Кельвина. Рассмотрим две из них.</p>
+  <div class="def"><b>Шкала Цельсия [°C], t:</b> 0 °C — тает лёд, 100 °C — кипит вода. Между ними 100 частей, одна часть — 1 °C.</div>
+  <p>Здоровый человек: 36,6 °C.</p>
 
   <h2><span class="n">4</span>Абсолютный нуль. Шкала Кельвина</h2>
-  <div class="def"><b>Шкала Кельвина [К], T:</b> 0 К — <b>абсолютный нуль</b>, самая низкая возможная температура (−273 °C). Около неё движение молекул почти прекращается. Ниже охладить нельзя.</div>
-  <p>Цена деления (шаг) у шкал Цельсия и Кельвина одинаковая. Единица в СИ — кельвин. Говорим «кельвин», а не «градус».</p>
+  <div class="def"><b>Шкала Кельвина [К], T:</b> 0 К — <b>абсолютный нуль</b>, самая низкая температура (−273 °C). Молекулы почти не движутся. Холоднее не бывает.</div>
+  <p>Шаг у шкал одинаковый: 1 К по размеру равен 1 °C.<br>Например, 300 К, а не 300 °К.</p>
+  <div class="steps-fig"><svg viewBox="0 0 340 170" role="img" aria-label="Две шкалы с одинаковым шагом" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="7" stroke="#f08c00" stroke-width="2.2"/></pattern>
+      <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#1c4f9c"/></marker>
+    </defs>
+    <rect x="90" y="52" width="70" height="66" fill="url(#hatch)" opacity=".75"/>
+    <g stroke="#1c4f9c" stroke-width="2.5" fill="none">
+      <line x1="18" y1="52" x2="296" y2="52" marker-end="url(#arr)"/>
+      <line x1="18" y1="118" x2="296" y2="118" marker-end="url(#arr)"/>
+      <path d="M18 42v20M90 42v20M160 42v20M230 42v20"/>
+      <path d="M18 108v20M90 108v20M160 108v20M230 108v20"/>
+    </g>
+    <g stroke="#1c4f9c" stroke-width="2" stroke-dasharray="2 5" stroke-linecap="round"><line x1="90" y1="62" x2="90" y2="108"/><line x1="160" y1="62" x2="160" y2="108"/></g>
+    <g font-family="system-ui,Arial,sans-serif" font-size="17" font-weight="700" fill="#1a2b55" text-anchor="middle">
+      <text x="90" y="32">1 °C</text><text x="160" y="32">2 °C</text><text x="230" y="32">3 °C</text>
+      <text x="90" y="152">274</text><text x="160" y="152">275</text><text x="230" y="152">276</text>
+    </g>
+    <g font-family="system-ui,Arial,sans-serif" font-size="15" font-weight="700" fill="#1c4f9c"><text x="304" y="57">°C</text><text x="304" y="123">К</text></g>
+  </svg></div>
 
   <div class="lab">
-    <b>Две шкалы рядом.</b> Двигайте ползунок или нажмите на кнопку.
+    <b>Две шкалы рядом</b>
     <div class="ctl"><label for="sl3">t, °C</label><input id="sl3" type="range" min="-273" max="100" step="0.1" value="36.6"></div>
     <div class="btns" id="lm"></div>
     <canvas id="cv3" style="max-width:340px"></canvas>
@@ -123,25 +144,25 @@
   </div>
 
   <div class="form">
-    <span class="leg">Формулы перевода одной шкалы в другую:</span>
+    <span class="leg">Перевод шкал:</span>
     <span class="big">T = t + 273</span>
     <span class="big">t = T − 273</span>
     <span class="big">ΔT = Δt</span>
   </div>
-  <div class="key"><div>Изменение температуры в К и в °C — одно и то же число.</div></div>
+  <div class="key"><div>Изменение температуры в К и в °C одинаково.</div></div>
 
   <h2><span class="n">5</span>Пример</h2>
   <div class="box">
-    <p>После жаропонижающего температура больного упала с 39,2 °C до 37,1 °C. На сколько кельвинов она упала?</p>
+    <p>Температура больного упала с 39,2 °C до 37,1 °C. На сколько кельвинов?</p>
     <table>
       <thead><tr><th>Дано</th><th>СИ</th><th>Решение</th></tr></thead>
       <tbody><tr>
         <td data-l="Дано">t<sub>1</sub> = 39,2 °C<br>t<sub>2</sub> = 37,1 °C<br>ΔT — ?</td>
         <td data-l="СИ">T<sub>1</sub> = 39,2 + 273 = 312,2 К<br>T<sub>2</sub> = 37,1 + 273 = 310,1 К</td>
-        <td data-l="Решение">ΔT = T<sub>1</sub> − T<sub>2</sub> = 312,2 − 310,1 = 2,1 К<br>Проверка: Δt = 39,2 − 37,1 = 2,1 °C. Число то же.</td>
+        <td data-l="Решение">ΔT = T<sub>1</sub> − T<sub>2</sub> = 312,2 − 310,1 = 2,1 К<br>Проверка: Δt = 39,2 − 37,1 = 2,1 °C</td>
       </tr></tbody>
     </table>
-    <p><b>Ответ:</b> <span class="res">температура упала на 2,1 К.</span></p>
+    <p><b>Ответ:</b> <span class="res">на 2,1 К.</span></p>
   </div>
 
   <div class="foot">Авторские материалы Мурада Магомедова, преподавателя физики.</div>
@@ -296,6 +317,7 @@
   var frozenE = false;
   function stepE(dt){ var T = Math.max(0, t3() + 273);
     gasE.step(dt, Math.max(1.5, 170 * Math.pow(T / 373, 2))); }
+
 
   /* ---------- общий цикл (только для видимых картинок) ---------- */
   var vis = {}, last = 0;
