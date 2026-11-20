@@ -30,7 +30,15 @@
   .box{margin:12px 0;padding:12px 14px;border:1px solid #3a4a8c;border-radius:12px;background:#121a35}
   .lab{margin:14px 0;padding:12px;border:1px dashed #3a4a8c;border-radius:12px}
   .lab .row{display:grid;grid-template-columns:1fr;gap:12px;margin:10px 0}
-  @media(min-width:680px){.lab .row.three{grid-template-columns:repeat(3,1fr)}}
+  .lab .row.three{grid-template-columns:1fr 1fr;gap:8px 10px}
+  .lab .row.three figure:nth-child(3){grid-column:1/-1}
+  .lab .row.three figure:nth-child(3) canvas{max-width:250px}
+  .lab .row.three figcaption{font-size:13px}
+  @media(min-width:680px){.lab .row.three{grid-template-columns:repeat(3,1fr)}.lab .row.three figure:nth-child(3){grid-column:auto}.lab .row.three figure:nth-child(3) canvas{max-width:340px}}
+  .sticky .ctl{margin:0}
+  .sticky .out{font-size:16px;margin:0 0 2px;white-space:nowrap}
+  .sticky input[type=range]{height:30px}
+  .sticky{position:sticky;top:0;z-index:5;background:#0d1326;padding:6px 0 4px;margin:0 -4px;border-bottom:1px solid #2a3566}
   .lab figure{margin:0;text-align:center}
   .lab figcaption{font-size:14px;color:#9aa8d4;margin-top:4px;line-height:1.35}
   canvas{display:block;width:100%;max-width:340px;height:auto;margin:0 auto;background:#fff;border-radius:8px}
@@ -73,8 +81,10 @@
 
   <div class="lab">
     <b>Попробуйте сами:</b> двигайте ползунок и смотрите на все три картинки.
-    <div class="ctl"><label for="sl1">Температура t, °C</label><input id="sl1" type="range" min="-150" max="350" step="5" value="20"></div>
+    <div class="sticky">
+    <div class="ctl"><label for="sl1">t, °C</label><input id="sl1" type="range" min="-150" max="350" step="5" value="20"></div>
     <div class="out" id="out1"></div>
+    </div>
     <div class="row three">
       <figure><canvas id="cvA"></canvas><figcaption>Молекулы: чем теплее, тем быстрее</figcaption></figure>
       <figure><canvas id="cvB"></canvas><figcaption>Термометр: жидкость расширяется, столбик растёт</figcaption></figure>
@@ -192,7 +202,7 @@
     for (var t = Math.ceil(tmin / tick) * tick; t <= tmax + 1e-6; t += tick){
       var yy = by - (by - top - 14) * ((t - tmin) / (tmax - tmin));
       g.beginPath(); g.moveTo(cx + tubeW / 2 + 2, yy); g.lineTo(cx + tubeW / 2 + 9, yy); g.stroke();
-      txt(g, fmt(t, 0), cx + tubeW / 2 + 12, yy + 4, 11, '#1a2b55');
+      txt(g, fmt(t, 0), cx + tubeW / 2 + 12, yy + 5, 13, '#1a2b55');
     }
     return y;
   }
