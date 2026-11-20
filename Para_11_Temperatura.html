@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Лекция 11. Температура. Шкалы Цельсия и Кельвина</title>
+<style>
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:#0d1326;color:#eaf0ff;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-size:17px;line-height:1.55;display:flex;justify-content:center}
+  .wrap{width:100%;max-width:760px;padding:18px 16px 40px;overflow-wrap:anywhere}
+  a.back{color:#8fb0ff;text-decoration:none;font-size:15px}
+  .top{display:flex;align-items:center;gap:12px;margin:12px 0 4px}
+  .lg{color:#6ea8ff;height:44px;width:auto;flex:none}
+  .kick{font-size:12px;letter-spacing:.08em;color:#8fa0d0;font-weight:700;text-transform:uppercase}
+  h1{font-size:26px;line-height:1.2;margin:4px 0 4px;color:#fff}
+  .sub{color:#9aa8d4;font-style:italic;margin:0 0 14px}
+  .pdf{display:inline-block;margin:0 0 6px;padding:9px 14px;border-radius:10px;background:#1c2750;border:1px solid #3a4a8c;color:#eaf0ff;text-decoration:none;font-size:15px}
+  h2{display:flex;align-items:center;gap:10px;margin:26px 0 12px;padding:9px 12px;border-radius:10px;background:#1d4a7a;font-size:19px;line-height:1.25;color:#fff}
+  h2 .n{flex:none;width:28px;height:28px;border-radius:50%;background:#fff;color:#1d4a7a;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px}
+  p{margin:0 0 12px}
+  .key{display:flex;gap:12px;align-items:flex-start;margin:12px 0;padding:12px 14px;border-radius:12px;background:#3a1a22;border:1px solid #b34a58}
+  .key::before{content:"!";flex:none;width:26px;height:26px;border-radius:50%;background:#e0384c;color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:1px}
+  .key b{color:#fff}
+  .def{margin:12px 0;padding:12px 14px;border-radius:12px;background:#142348;border-left:5px solid #5b82ff}
+  .def b{color:#fff}
+  .form{margin:14px 0;padding:12px 14px;border-radius:12px;background:#142348;border-left:5px solid #5b82ff}
+  .form .big{display:block;font-size:26px;font-weight:800;color:#fff;margin:2px 0}
+  .form .leg{color:#b9c7ee;font-size:15px;margin-top:6px}
+  .box{margin:12px 0;padding:12px 14px;border:1px solid #3a4a8c;border-radius:12px;background:#121a35}
+  .lab{margin:14px 0;padding:12px;border:1px dashed #3a4a8c;border-radius:12px}
+  .lab .row{display:grid;grid-template-columns:1fr;gap:12px;margin:10px 0}
+  @media(min-width:680px){.lab .row.three{grid-template-columns:repeat(3,1fr)}}
+  .lab figure{margin:0;text-align:center}
+  .lab figcaption{font-size:14px;color:#9aa8d4;margin-top:4px;line-height:1.35}
+  canvas{display:block;width:100%;max-width:340px;height:auto;margin:0 auto;background:#fff;border-radius:8px}
+  .ctl{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:8px 0}
+  .ctl label{font-weight:700;color:#cfe0ff;flex:none}
+  input[type=range]{flex:1 1 200px;min-width:160px;height:34px;accent-color:#5b82ff}
+  .out{font-size:18px;font-weight:700;color:#fff;margin:6px 0}
+  .out .ok{color:#9df0b8}
+  .btns{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+  button{font:inherit;font-size:15px;padding:9px 13px;border-radius:10px;border:1px solid #3a4a8c;background:#1c2750;color:#eaf0ff;cursor:pointer}
+  button:active{background:#2a3a78}
+  table{width:100%;border-collapse:collapse;margin:14px 0}
+  th,td{border:1px solid #2a3566;padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:#1c2750;color:#cfe0ff}
+  @media(max-width:600px){
+    table,thead,tbody,tr,th,td{display:block;width:100%}
+    thead{display:none}
+    tr{margin:0 0 12px;border:1px solid #2a3566;border-radius:12px;overflow:hidden}
+    td{border:none;border-top:1px solid #222c58}
+    td:first-child{border-top:none}
+    td[data-l]::before{content:attr(data-l) ": ";font-weight:700;color:#8fb0ff;display:block}
+  }
+  .res{color:#9df0b8;font-weight:800}
+  .foot{margin-top:26px;font-size:13px;color:#7886b8}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="./">← Все лекции</a>
+  <div class="top"><svg class="lg" viewBox="-80 -68 160 136" role="img" aria-label="Логотип автора: атом МХ"><g fill="none" stroke="currentColor" stroke-width="2.6"><ellipse rx="72" ry="25"/><ellipse rx="72" ry="25" transform="rotate(60)"/><ellipse rx="72" ry="25" transform="rotate(120)"/></g><g fill="currentColor"><circle cx="72" r="6"/><circle cx="72" r="6" transform="rotate(60)"/><circle cx="72" r="6" transform="rotate(120)"/><circle r="31"/></g><text y="9" text-anchor="middle" font-size="25" font-weight="600" fill="#fff" font-family="Segoe UI,Roboto,Arial,sans-serif">МХ</text></svg><div><div class="kick">Лекция 11. Молекулярная физика</div></div></div>
+  <h1>Температура. Шкалы Цельсия и Кельвина</h1>
+  <p class="sub">Конспект для тетради</p>
+  <a class="pdf" href="Para_11_Temperatura.pdf">⬇ Скачать PDF для печати</a>
+
+  <h2><span class="n">1</span>Тепловые явления</h2>
+  <p>Явления нагревания и охлаждения, таяния, плавления называются <b>тепловыми явлениями</b>.</p>
+
+  <h2><span class="n">2</span>Температура</h2>
+  <div class="def"><b>Температура</b> — величина, которая характеризует тепловое состояние тела (насколько оно нагрето) и показывает, как быстро в среднем движутся его молекулы. Чем выше температура, тем быстрее движутся молекулы.</div>
+
+  <div class="lab">
+    <b>Попробуйте сами:</b> двигайте ползунок и смотрите на все три картинки.
+    <div class="ctl"><label for="sl1">Температура t, °C</label><input id="sl1" type="range" min="-150" max="350" step="5" value="20"></div>
+    <div class="out" id="out1"></div>
+    <div class="row three">
+      <figure><canvas id="cvA"></canvas><figcaption>Молекулы: чем теплее, тем быстрее</figcaption></figure>
+      <figure><canvas id="cvB"></canvas><figcaption>Термометр: жидкость расширяется, столбик растёт</figcaption></figure>
+      <figure><canvas id="cvC"></canvas><figcaption>Газ в закрытом баллоне: давление растёт</figcaption></figure>
+    </div>
+  </div>
+
+  <p>При нагревании молекулы движутся быстрее, чаще и сильнее отталкивают друг друга. Расстояния между ними растут, поэтому тело <b>расширяется</b> (объём растёт). При охлаждении тело сжимается.</p>
+  <p>Газ в закрытом сосуде расширяться не может: у него растёт <b>давление</b>. При охлаждении давление падает. Поэтому кислородный баллон нельзя ставить у батареи и на солнце.</p>
+
+  <div class="def"><b>Тепловое равновесие</b> — состояние, при котором температуры тел одинаковы и не меняются: тепло от тела к телу больше не переходит.</div>
+
+  <div class="lab">
+    <b>Градусник под мышкой.</b> Нажмите кнопку и смотрите, что будет с показанием.
+    <div class="btns"><button id="go2">Положить под мышку</button><button id="rs2">Заново</button></div>
+    <canvas id="cv2" style="max-width:340px"></canvas>
+    <div class="out" id="out2"></div>
+  </div>
+  <div class="key"><div>Термометр показывает температуру <b>самого себя</b>. Градусник держат под мышкой несколько минут, пока он не придёт в тепловое равновесие с телом.</div></div>
+
+  <h2><span class="n">3</span>Термометр. Шкала Цельсия</h2>
+  <p>В термометре жидкость при нагревании расширяется, и столбик поднимается. Значит, термометр измеряет не температуру, а объём (высоту столбика). Чтобы связать объём с температурой, нужна <b>температурная шкала</b>. Самые распространённые: Цельсия, Фаренгейта и Кельвина. Мы изучаем шкалы Цельсия и Кельвина.</p>
+  <div class="def"><b>Шкала Цельсия [°C], t:</b> 0 °C — таяние льда; 100 °C — кипение воды (при нормальном атмосферном давлении). Между ними 100 равных частей, одна часть — 1 °C.</div>
+  <p>Здоровый человек: 36,6 °C. Выше 42 °C — опасно для жизни, ниже 35 °C — переохлаждение.</p>
+
+  <h2><span class="n">4</span>Абсолютный нуль. Шкала Кельвина</h2>
+  <div class="def"><b>Шкала Кельвина [К], T:</b> 0 К — <b>абсолютный нуль</b>, самая низкая возможная температура (−273 °C). Около неё движение молекул почти прекращается. Ниже охладить нельзя.</div>
+  <p>Цена деления (шаг) у шкал Цельсия и Кельвина одинаковая. Единица в СИ — кельвин. Говорим «кельвин», а не «градус».</p>
+
+  <div class="lab">
+    <b>Две шкалы рядом.</b> Двигайте ползунок или нажмите на кнопку.
+    <div class="ctl"><label for="sl3">t, °C</label><input id="sl3" type="range" min="-273" max="100" step="0.1" value="36.6"></div>
+    <div class="btns" id="lm"></div>
+    <canvas id="cv3" style="max-width:340px"></canvas>
+    <div class="out" id="out3"></div>
+  </div>
+
+  <div class="form">
+    <span class="leg">Формулы перевода одной шкалы в другую:</span>
+    <span class="big">T = t + 273</span>
+    <span class="big">t = T − 273</span>
+    <span class="big">ΔT = Δt</span>
+  </div>
+  <div class="key"><div>Изменение температуры в К и в °C — одно и то же число.</div></div>
+
+  <h2><span class="n">5</span>Пример</h2>
+  <div class="box">
+    <p>После жаропонижающего температура больного упала с 39,2 °C до 37,1 °C. На сколько кельвинов она упала?</p>
+    <table>
+      <thead><tr><th>Дано</th><th>СИ</th><th>Решение</th></tr></thead>
+      <tbody><tr>
+        <td data-l="Дано">t<sub>1</sub> = 39,2 °C<br>t<sub>2</sub> = 37,1 °C<br>ΔT — ?</td>
+        <td data-l="СИ">T<sub>1</sub> = 39,2 + 273 = 312,2 К<br>T<sub>2</sub> = 37,1 + 273 = 310,1 К</td>
+        <td data-l="Решение">ΔT = T<sub>1</sub> − T<sub>2</sub> = 312,2 − 310,1 = 2,1 К<br>Проверка: Δt = 39,2 − 37,1 = 2,1 °C. Число то же.</td>
+      </tr></tbody>
+    </table>
+    <p><b>Ответ:</b> <span class="res">температура упала на 2,1 К.</span></p>
+  </div>
+
+  <div class="foot">Авторские материалы Мурада Магомедова, преподавателя физики.</div>
+</div>
+<script>
+(function(){
+  var reduce = false; try{ reduce = matchMedia('(prefers-reduced-motion: reduce)').matches; }catch(e){}
+  function fmt(x, d){ return x.toFixed(d || 0).replace('.', ',').replace('-', '−'); }
+  function rnd(a, b){ return a + Math.random() * (b - a); }
+  function setup(id, W, H){
+    var c = document.getElementById(id), r = Math.min(window.devicePixelRatio || 1, 2);
+    c.width = W * r; c.height = H * r; c.style.aspectRatio = W + ' / ' + H;
+    var g = c.getContext('2d'); g.setTransform(r, 0, 0, r, 0, 0); return {c:c, g:g, W:W, H:H};
+  }
+  function col(T){ var k = Math.max(0, Math.min(1, T / 623));
+    return 'rgb(' + Math.round(47 + 177 * k) + ',' + Math.round(111 - 55 * k) + ',' + Math.round(208 - 132 * k) + ')'; }
+  function speed1(T){ return Math.max(3, 170 * Math.pow(Math.max(T, 0) / 623, 2)); }
+  function speed(T){ return Math.max(1.5, 75 * Math.sqrt(Math.max(T, 0) / 293)); }
+  function frame(g, x, y, w, h, fill){
+    g.fillStyle = fill || '#f4f8ff'; g.strokeStyle = '#1c4f9c'; g.lineWidth = 2;
+    g.beginPath(); g.rect(x, y, w, h); g.fill(); g.stroke();
+  }
+  function txt(g, s, x, y, size, color, align, bold){
+    g.font = (bold ? '700 ' : '') + size + 'px system-ui,Arial,sans-serif'; g.fillStyle = color || '#1a2b55'; g.textAlign = align || 'left'; g.fillText(s, x, y);
+  }
+  /* коробка с молекулами */
+  function Gas(x, y, w, h, n, r){
+    var ms = [];
+    for (var i = 0; i < n; i++){ var a = rnd(0, 6.283); ms.push({x:rnd(x + r, x + w - r), y:rnd(y + r, y + h - r), ux:Math.cos(a), uy:Math.sin(a)}); }
+    return {
+      step:function(dt, v){ this.v = v; ms.forEach(function(m){
+        m.vx = m.ux * v; m.vy = m.uy * v;
+        m.x += m.ux * v * dt; m.y += m.uy * v * dt;
+        if (m.x < x + r){ m.x = x + r; m.ux = Math.abs(m.ux); } if (m.x > x + w - r){ m.x = x + w - r; m.ux = -Math.abs(m.ux); }
+        if (m.y < y + r){ m.y = y + r; m.uy = Math.abs(m.uy); } if (m.y > y + h - r){ m.y = y + h - r; m.uy = -Math.abs(m.uy); } }); },
+      freeze:function(dt){
+        if (!this.sl){ this.sl = true; ms.slice().sort(function(p, q){ return p.x - q.x; }).forEach(function(m, i){ m.slot = x + r + i * (w - 2 * r) / (ms.length - 1); }); }
+        ms.forEach(function(m){ m.x += (m.slot - m.x) * Math.min(1, 3 * dt);
+        m.vx = (m.vx || 0) * Math.exp(-7 * dt); m.vy = (m.vy || 0) * Math.exp(-2.5 * dt) + 700 * dt;
+        m.x += m.vx * dt; m.y += m.vy * dt;
+        if (m.y > y + h - r){ m.y = y + h - r; m.vy = 0; } }); },
+      wake:function(){ this.sl = false; ms.forEach(function(m){ var a = rnd(0, 6.283); m.ux = Math.cos(a); m.uy = Math.sin(a); }); },
+      draw:function(g, T){ var c = col(T), v = this.v || 0; ms.forEach(function(m){
+        g.beginPath(); g.arc(m.x, m.y, r, 0, 6.2832); g.fillStyle = c; g.fill(); g.lineWidth = 1; g.strokeStyle = 'rgba(0,0,0,.35)'; g.stroke();
+        g.beginPath(); g.arc(m.x - r * .3, m.y - r * .3, r * .28, 0, 6.2832); g.fillStyle = 'rgba(255,255,255,.6)'; g.fill(); }); }
+    };
+  }
+  /* термометр: колба и трубка */
+  function thermo(g, cx, top, bottom, level, tmin, tmax, tick, labelSide){
+    var bulbR = 12, tubeW = 12, by = bottom - bulbR;
+    g.fillStyle = '#fff'; g.strokeStyle = '#1c4f9c'; g.lineWidth = 2;
+    g.beginPath(); g.moveTo(cx - tubeW / 2, top + 6); g.arc(cx, top + 6, tubeW / 2, Math.PI, 0); g.lineTo(cx + tubeW / 2, by - 8); g.arc(cx, by + 2, bulbR, -1.0, Math.PI + 1.0, false); g.closePath(); g.fill(); g.stroke();
+    var y = by - (by - top - 14) * ((level - tmin) / (tmax - tmin));
+    g.fillStyle = '#e0384c';
+    g.beginPath(); g.arc(cx, by + 2, bulbR - 3, 0, 6.2832); g.fill();
+    g.fillRect(cx - 2.5, y, 5, by - y);
+    g.strokeStyle = '#1c4f9c'; g.lineWidth = 1; g.fillStyle = '#1a2b55';
+    for (var t = Math.ceil(tmin / tick) * tick; t <= tmax + 1e-6; t += tick){
+      var yy = by - (by - top - 14) * ((t - tmin) / (tmax - tmin));
+      g.beginPath(); g.moveTo(cx + tubeW / 2 + 2, yy); g.lineTo(cx + tubeW / 2 + 9, yy); g.stroke();
+      txt(g, fmt(t, 0), cx + tubeW / 2 + 12, yy + 4, 11, '#1a2b55');
+    }
+    return y;
+  }
+
+  /* ---------- 1. три картинки с одним ползунком ---------- */
+  var A = setup('cvA', 200, 160), B = setup('cvB', 200, 160), C = setup('cvC', 200, 160);
+  var sl1 = document.getElementById('sl1'), out1 = document.getElementById('out1');
+  var gasA = Gas(10, 10, 180, 140, 14, 5.5), gasC = Gas(14, 40, 92, 110, 9, 5);
+  var lvl = 20, needle = 0.2;
+  function t1(){ return parseFloat(sl1.value); }
+  function upd1(){ var t = t1(); out1.innerHTML = 't = ' + fmt(t) + ' °C &nbsp;→&nbsp; T = ' + fmt(t) + ' + 273 = ' + fmt(t + 273) + ' К'; }
+  sl1.addEventListener('input', function(){ upd1(); if (reduce) drawAll(0); });
+  upd1();
+  function drawA(){ var g = A.g; g.clearRect(0, 0, A.W, A.H); frame(g, 4, 4, 192, 152); gasA.draw(g, t1() + 273);
+    var sv = speed1(t1() + 273); g.fillStyle = '#dfe8f7'; g.fillRect(12, 142, 120, 8); g.fillStyle = '#f08c00'; g.fillRect(12, 142, 120 * sv / 170, 8); txt(g, 'скорость', 138, 150, 11, '#1a2b55'); }
+  function drawB(){ var g = B.g; g.clearRect(0, 0, B.W, B.H); thermo(g, 70, 10, 150, lvl, -150, 350, 100); }
+  function drawC(){ var g = C.g, T = t1() + 273; g.clearRect(0, 0, C.W, C.H);
+    frame(g, 10, 34, 100, 120); g.fillStyle = '#9db7d0'; g.fillRect(48, 22, 24, 12); g.strokeRect(48, 22, 24, 12);
+    g.strokeStyle = '#1c4f9c'; g.lineWidth = 3; g.beginPath(); g.moveTo(60, 22); g.lineTo(60, 12); g.lineTo(150, 12); g.lineTo(150, 34); g.stroke();
+    gasC.draw(g, T);
+    var cx = 150, cy = 70, R = 36;
+    g.fillStyle = '#fff'; g.strokeStyle = '#1c4f9c'; g.lineWidth = 2; g.beginPath(); g.arc(cx, cy, R, 0, 6.2832); g.fill(); g.stroke();
+    g.lineWidth = 1; for (var i = 0; i <= 8; i++){ var a = Math.PI * 0.75 + i * Math.PI * 1.5 / 8; g.beginPath(); g.moveTo(cx + Math.cos(a) * (R - 8), cy + Math.sin(a) * (R - 8)); g.lineTo(cx + Math.cos(a) * (R - 3), cy + Math.sin(a) * (R - 3)); g.stroke(); }
+    var an = Math.PI * 0.75 + needle * Math.PI * 1.5;
+    g.strokeStyle = '#e0384c'; g.lineWidth = 3; g.beginPath(); g.moveTo(cx, cy); g.lineTo(cx + Math.cos(an) * (R - 8), cy + Math.sin(an) * (R - 8)); g.stroke();
+    g.fillStyle = '#1a2b55'; g.beginPath(); g.arc(cx, cy, 3.5, 0, 6.2832); g.fill();
+    txt(g, 'давление', cx, cy + R + 18, 12, '#1a2b55', 'center', true); }
+  function drawAll(dt){
+    var t = t1(); lvl += (t - lvl) * Math.min(1, dt * 5) || 0; if (reduce) lvl = t;
+    needle += (0.08 + 0.84 * ((t + 150) / 500) - needle) * Math.min(1, dt * 5) || 0; if (reduce) needle = 0.08 + 0.84 * ((t + 150) / 500);
+    drawA(); drawB(); drawC();
+  }
+
+  /* ---------- 2. градусник под мышкой ---------- */
+  var D = setup('cv2', 340, 190), out2 = document.getElementById('out2');
+  var s2 = 0, run2 = false, T0 = 24, TB = 36.6;
+  function read2(s){ return T0 + (TB - T0) * (1 - Math.exp(-5 * s)) / (1 - Math.exp(-5)); }
+  document.getElementById('go2').addEventListener('click', function(){ if (s2 >= 1) s2 = 0; run2 = true; if (reduce){ s2 = 1; } draw2(); });
+  document.getElementById('rs2').addEventListener('click', function(){ s2 = 0; run2 = false; draw2(); });
+  function draw2(){
+    var g = D.g; g.clearRect(0, 0, D.W, D.H);
+    var r = read2(s2), inb = s2 > 0 || run2;
+    g.fillStyle = '#f7c9b8'; g.strokeStyle = '#b36a50'; g.lineWidth = 2; g.beginPath(); g.rect(10, 50, 100, 120); g.fill(); g.stroke();
+    txt(g, 'тело', 60, 100, 14, '#6b2d1a', 'center', true); txt(g, '36,6 °C', 60, 120, 16, '#6b2d1a', 'center', true);
+    if (!inb){ r = T0; }
+    thermo(g, 138, 14, 172, r, 20, 40, 5);
+    /* график */
+    var gx = 205, gy = 18, gw = 122, gh = 130;
+    g.strokeStyle = '#1a2b55'; g.lineWidth = 1.5; g.beginPath(); g.moveTo(gx, gy); g.lineTo(gx, gy + gh); g.lineTo(gx + gw, gy + gh); g.stroke();
+    txt(g, 't, °C', gx - 4, gy - 6, 11, '#1a2b55'); for (var k = 0; k <= 5; k++){ var tx = gx + k / 5 * gw; g.beginPath(); g.moveTo(tx, gy + gh); g.lineTo(tx, gy + gh + 4); g.stroke(); txt(g, String(k * 2), tx, gy + gh + 15, 11, '#1a2b55', 'center'); }
+    txt(g, 'время, мин', gx + gw, gy + gh + 28, 11, '#1a2b55', 'right');
+    var ty = function(t){ return gy + gh - (t - 20) / 20 * gh; };
+    g.setLineDash([4, 3]); g.strokeStyle = '#b36a50'; g.beginPath(); g.moveTo(gx, ty(TB)); g.lineTo(gx + gw, ty(TB)); g.stroke(); g.setLineDash([]);
+    txt(g, '36,6', gx - 4, ty(TB) + 4, 11, '#b36a50', 'right');
+    g.strokeStyle = '#e0384c'; g.lineWidth = 2.5; g.beginPath();
+    for (var i = 0; i <= 60; i++){ var ss = i / 60 * s2, x = gx + ss * gw, y = ty(read2(ss)); if (i === 0) g.moveTo(x, y); else g.lineTo(x, y); }
+    g.stroke();
+    g.fillStyle = '#e0384c'; g.beginPath(); g.arc(gx + s2 * gw, ty(r), 4, 0, 6.2832); g.fill();
+    if (s2 >= 1) out2.innerHTML = 'Градусник: ' + fmt(TB, 1) + ' °C. <span class="ok">Тепловое равновесие: показание больше не меняется.</span>';
+    else if (inb) out2.innerHTML = 'Градусник: ' + fmt(r, 1) + ' °C. Прошло: ' + fmt(s2 * 10, 1) + ' мин.';
+    else out2.innerHTML = 'Градусник: ' + fmt(T0, 1) + ' °C. Он холоднее тела.';
+  }
+  draw2();
+
+  /* ---------- 3. две шкалы ---------- */
+  var E = setup('cv3', 340, 270), sl3 = document.getElementById('sl3'), out3 = document.getElementById('out3');
+  var gasE = Gas(212, 36, 118, 118, 12, 5);
+  var LM = [[-273, 'абсолютный нуль'], [0, 'лёд тает'], [36.6, 'тело человека'], [100, 'вода кипит']];
+  var lm = document.getElementById('lm');
+  LM.forEach(function(p){ var b = document.createElement('button'); b.textContent = p[1]; b.addEventListener('click', function(){ sl3.value = p[0]; upd3(); if (reduce) draw3(); }); lm.appendChild(b); });
+  function t3(){ return parseFloat(sl3.value); }
+  function upd3(){ var t = t3(); out3.innerHTML = 'T = t + 273 = ' + fmt(t, t % 1 ? 1 : 0) + ' + 273 = <span class="res">' + fmt(t + 273, (t + 273) % 1 > 0.04 && (t + 273) % 1 < 0.96 ? 1 : 0) + ' К</span>'; }
+  sl3.addEventListener('input', function(){ upd3(); if (reduce) draw3(); });
+  upd3();
+  function y3(t){ return 250 - (t + 273) / 373 * 225; }
+  function draw3(){
+    var g = E.g, t = t3(); g.clearRect(0, 0, E.W, E.H);
+    var ax = 110;
+    var y = y3(t);
+    g.fillStyle = 'rgba(240,140,0,.28)'; g.fillRect(8, y - 9, ax + 78, 18);
+    txt(g, 't, °C', ax - 12, 14, 12, '#1c4f9c', 'right', true); txt(g, 'T, К', ax + 12, 14, 12, '#1c4f9c', 'left', true);
+    g.strokeStyle = '#1c4f9c'; g.lineWidth = 4; g.beginPath(); g.moveTo(ax, y3(100)); g.lineTo(ax, y3(-273)); g.stroke();
+    LM.forEach(function(p){ var y = y3(p[0]), red = p[0] === -273, c = red ? '#c00000' : '#1c4f9c';
+      g.strokeStyle = c; g.lineWidth = 3; g.beginPath(); g.moveTo(ax - 7, y); g.lineTo(ax + 7, y); g.stroke();
+      txt(g, fmt(p[0], p[0] % 1 ? 1 : 0), ax - 12, y + 4, 12, c, 'right', true); txt(g, fmt(p[0] + 273, (p[0] + 273) % 1 > 0.04 ? 1 : 0), ax + 12, y + 4, 12, c, 'left', true); });
+    g.fillStyle = '#f08c00'; g.beginPath(); g.arc(ax, y, 6.5, 0, 6.2832); g.fill();
+    frame(g, 200, 24, 134, 134, '#f4f8ff'); gasE.draw(g, (t + 273) * 623 / 373);
+    txt(g, 'молекулы', 267, 176, 12, '#1a2b55', 'center', true);
+    txt(g, t3() + 273 < 1 ? 'почти стоят' : (t3() < 0 ? 'медленно' : 'быстрее'), 267, 192, 12, '#555', 'center');
+  }
+  var frozenE = false;
+  function stepE(dt){ var T = Math.max(0, t3() + 273);
+    gasE.step(dt, Math.max(1.5, 170 * Math.pow(T / 373, 2))); }
+
+  /* ---------- общий цикл (только для видимых картинок) ---------- */
+  var vis = {}, last = 0;
+  var targets = [['cvA', 'a'], ['cv2', 'b'], ['cv3', 'c']];
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ vis[e.target.id] = e.isIntersecting; }); }, {threshold:0});
+    ['cvA', 'cvB', 'cvC', 'cv2', 'cv3'].forEach(function(id){ io.observe(document.getElementById(id)); });
+  } else { ['cvA', 'cvB', 'cvC', 'cv2', 'cv3'].forEach(function(id){ vis[id] = true; }); }
+  function loop(ts){
+    var dt = Math.min(0.05, (ts - last) / 1000 || 0.016); last = ts;
+    if (vis.cvA || vis.cvB || vis.cvC){ var v = speed1(t1() + 273); gasA.step(dt, v); gasC.step(dt, v); drawAll(dt); }
+    if (vis.cv2){ if (run2 && s2 < 1){ s2 = Math.min(1, s2 + dt / 6); } draw2(); }
+    if (vis.cv3){ stepE(dt); draw3(); }
+    requestAnimationFrame(loop);
+  }
+  drawAll(1); draw3();
+  if (!reduce) requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
